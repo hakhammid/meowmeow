@@ -99,7 +99,6 @@ body::after {
     transition: transform 0.2s ease;
 }
 
-/* subtle bounce on gif change (optional) */
 .cat-gif:active {
     transform: scale(0.98);
 }
