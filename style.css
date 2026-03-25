@@ -1,0 +1,233 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(145deg, #ff9a9e 0%, #fad0c4 50%, #fad0c4 100%);
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Dancing Script', cursive;
+    padding: 1rem;
+    margin: 0;
+    position: relative;
+}
+
+/* floating decorative hearts */
+body::before {
+    content: "❤️💖💘💕💗";
+    position: absolute;
+    font-size: 60px;
+    top: 10%;
+    left: 5%;
+    opacity: 0.08;
+    white-space: nowrap;
+    pointer-events: none;
+    transform: rotate(-10deg);
+    z-index: 0;
+}
+
+body::after {
+    content: "💌💞💓💝💟";
+    position: absolute;
+    bottom: 5%;
+    right: 3%;
+    font-size: 70px;
+    opacity: 0.08;
+    pointer-events: none;
+    transform: rotate(5deg);
+    z-index: 0;
+}
+
+/* main love card */
+.love-card {
+    background: rgba(255, 250, 240, 0.96);
+    backdrop-filter: blur(2px);
+    max-width: 650px;
+    width: 100%;
+    padding: 1.5rem 1.5rem 2rem;
+    border-radius: 72px 48px 80px 48px;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), 0 0 0 8px #fff5e6, 0 0 0 12px #ffb7c5;
+    transition: all 0.2s ease;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.love-card h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #c6286e;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.heart-icon {
+    font-size: 2.5rem;
+    animation: pulse 1.5s infinite ease;
+    display: inline-block;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 6px #ff3366; }
+}
+
+/* cat GIF */
+.cat-container {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.cat-gif {
+    max-width: 100%;
+    height: auto;
+    border-radius: 48px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    border: 3px solid #fff5e6;
+}
+
+.question {
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin: 1rem 0 1.5rem;
+    color: #b13e6b;
+    font-family: 'Dancing Script', cursive;
+    background: #fff0f3;
+    display: inline-block;
+    padding: 0.3rem 1.4rem;
+    border-radius: 60px;
+}
+
+/* button group */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    margin: 20px 0 15px;
+    position: relative;
+}
+
+/* base button styles */
+.btn {
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 60px;
+    transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* YES button: smaller initially */
+.btn-yes {
+    background: #f43b6e;
+    color: white;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 18px -8px #f43b6e80;
+    border: 1px solid #ffa7c0;
+    font-size: 1.1rem;
+    padding: 8px 20px;
+    transition: all 0.2s ease-out;
+}
+
+/* NO button: larger initially */
+.btn-no {
+    background: #4b3b40;
+    color: #ffe3e8;
+    border: 1px solid #7a5a62;
+    font-size: 1.4rem;
+    padding: 12px 28px;
+    transition: all 0.2s;
+}
+
+.btn-no:hover {
+    background: #2c1e22;
+    transform: scale(0.96);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+/* celebration area */
+.celebration {
+    margin-top: 25px;
+    background: linear-gradient(120deg, #ffe6f0, #ffd9e4);
+    border-radius: 48px;
+    padding: 1.2rem;
+    animation: fadePop 0.6s ease forwards;
+}
+
+.celebration h3 {
+    font-size: 1.9rem;
+    font-family: 'Dancing Script', cursive;
+    color: #b32d62;
+}
+
+.celebration p {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadePop {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+/* responsive adjustments */
+@media (max-width: 550px) {
+    .love-card {
+        padding: 1rem;
+    }
+    .love-card h1 {
+        font-size: 1.8rem;
+    }
+    .heart-icon {
+        font-size: 2rem;
+    }
+    .question {
+        font-size: 1.3rem;
+        padding: 0.2rem 1rem;
+    }
+    .btn-yes {
+        font-size: 0.9rem;
+        padding: 6px 16px;
+    }
+    .btn-no {
+        font-size: 1.2rem;
+        padding: 10px 22px;
+    }
+    .button-group {
+        gap: 20px;
+    }
+    .celebration h3 {
+        font-size: 1.5rem;
+    }
+    .celebration p {
+        font-size: 1rem;
+    }
+}

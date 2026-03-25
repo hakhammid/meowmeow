@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>💌 Prank Love Letter · Cat Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="love-card" id="loveCard">
+        <h1>
+            <span class="heart-icon">💌</span> 
+            A Secret Love Letter
+            <span class="heart-icon">💖</span>
+        </h1>
+
+        <!-- Cat GIF -->
+        <div class="cat-container">
+            <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" 
+                 alt="Cute cat asking for love" 
+                 class="cat-gif">
+        </div>
+
+        <div class="question">
+            💕 Will you be mine? 💕
+        </div>
+
+        <div class="button-group" id="buttonGroup">
+            <button class="btn btn-yes" id="yesBtn">💖 YES 💖</button>
+            <button class="btn btn-no" id="noBtn">😿 NO 😿</button>
+        </div>
+
+        <!-- celebration area hidden initially -->
+        <div id="celebrationArea" class="celebration hidden">
+            <h3>🎉 YOU SAID YES! 🎉</h3>
+            <p>💞 My heart exploded with joy! 💞 <br> 
+            I knew we were meant to be! 💘✨</p>
+            <div style="font-size: 3rem; line-height: 1.2;">💗💗💗</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
