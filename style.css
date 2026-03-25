@@ -96,6 +96,12 @@ body::after {
     border-radius: 48px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
     border: 3px solid #fff5e6;
+    transition: transform 0.2s ease;
+}
+
+/* subtle bounce on gif change (optional) */
+.cat-gif:active {
+    transform: scale(0.98);
 }
 
 .question {
