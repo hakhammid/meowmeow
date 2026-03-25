@@ -4,6 +4,20 @@
     const noBtn = document.getElementById('noBtn');
     const celebrationDiv = document.getElementById('celebrationArea');
     const loveCard = document.getElementById('loveCard');
+    const catGif = document.getElementById('catGif');
+
+    // Array of cat GIFs to cycle through on each "No" click
+    const catGifs = [
+        "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",   // original cute cat
+        "https://media.giphy.com/media/5i7W2I8PZ4I4Y/giphy.gif",   // confused cat
+        "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif", // shy cat
+        "https://media.giphy.com/media/LR7G8lYbYzvJ2/giphy.gif",    // surprised cat
+        "https://media.giphy.com/media/11s7Ke7jcNxCHS/giphy.gif",   // curious cat
+        "https://media.giphy.com/media/3o6Zt6ML6Bklcaj9ja/giphy.gif", // grumpy cat
+        "https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif",    // pleading cat
+        "https://media.giphy.com/media/3o6gbbrvEOqxQdHQQM/giphy.gif"  // excited cat
+    ];
+    let gifIndex = 0;
 
     // Prank core: YES button grows on each "No" click
     const BASE_FONT_SIZE = 18;      // px (original font size for YES)
@@ -74,13 +88,26 @@
         noBtn.innerHTML = noMessages[noMsgIndex];
     }
     
-    // when "NO" is clicked: enlarge YES button + change NO text + playful effect
+    // change cat GIF to next in list
+    function changeCatGif() {
+        if (isAccepted) return;
+        gifIndex = (gifIndex + 1) % catGifs.length;
+        catGif.src = catGifs[gifIndex];
+        // optional: add a tiny bounce effect
+        catGif.style.transform = "scale(0.98)";
+        setTimeout(() => {
+            catGif.style.transform = "";
+        }, 150);
+    }
+    
+    // when "NO" is clicked: enlarge YES button, change NO text, change cat GIF
     function onNoClick(e) {
         e.stopPropagation();
         if (isAccepted) return;
         
         enlargeYesButton();
         updateNoButtonText();
+        changeCatGif();
         
         // tiny pop effect on love-card border
         loveCard.style.transform = "scale(1.01)";
