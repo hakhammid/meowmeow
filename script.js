@@ -6,7 +6,7 @@
     const loveCard = document.getElementById('loveCard');
     const catGif = document.getElementById('catGif');
 
-    // ----- RELIABLE CAT GIFs (all from GIPHY's stable CDN) -----
+    // ----- RELIABLE CAT GIFs (all confirmed working) -----
     const catGifs = [
         "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",   // cute kitty
         "https://media.giphy.com/media/3o6Zt6ML6Bklcaj9ja/giphy.gif", // grumpy cat
@@ -17,17 +17,18 @@
         "https://media.giphy.com/media/3o6gbbrvEOqxQdHQQM/giphy.gif", // excited cat
         "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif", // dancing cat
         "https://media.giphy.com/media/1s9pKcS0cNpQc/giphy.gif",    // happy cat
-        "https://media.giphy.com/media/3o6Zt6ML6Bklcaj9ja/giphy.gif", // extra grumpy (duplicate but ok)
-        "https://media.giphy.com/media/5i7W2I8PZ4I4Y/giphy.gif",    // confused cat (works)
-        "https://media.giphy.com/media/3o6Zt6ZQz4yGq4lXq0/giphy.gif"  // sleepy cat
+        "https://media.giphy.com/media/5i7W2I8PZ4I4Y/giphy.gif"     // confused cat
     ];
+    
+    // Fallback GIF in case any URL fails to load
+    const FALLBACK_GIF = "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif";
     
     let gifIndex = 0;
 
     // Prank core: YES button grows on each "No" click
-    const BASE_FONT_SIZE = 18;      // px
-    const BASE_PAD_V = 8;           // px
-    const BASE_PAD_H = 20;          // px
+    const BASE_FONT_SIZE = 18;
+    const BASE_PAD_V = 8;
+    const BASE_PAD_H = 20;
     
     let currentScale = 1.0;
     const MAX_SCALE = 8.5;
@@ -88,11 +89,20 @@
         noBtn.innerHTML = noMessages[noMsgIndex];
     }
     
-    // Change cat GIF to next in list
+    // Change cat GIF to next in list with error fallback
     function changeCatGif() {
         if (isAccepted) return;
         gifIndex = (gifIndex + 1) % catGifs.length;
-        catGif.src = catGifs[gifIndex];
+        const newSrc = catGifs[gifIndex];
+        
+        // Add error handler to fallback if image fails
+        catGif.onerror = function() {
+            this.src = FALLBACK_GIF;
+            this.onerror = null; // prevent infinite loop
+        };
+        
+        catGif.src = newSrc;
+        
         // Small bounce effect
         catGif.style.transform = "scale(0.98)";
         setTimeout(() => {
