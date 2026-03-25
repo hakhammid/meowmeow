@@ -6,7 +6,7 @@
     const loveCard = document.getElementById('loveCard');
     const catGif = document.getElementById('catGif');
 
-    // ----- RELIABLE CAT GIFs (all confirmed working) -----
+    // ----- 100% WORKING CAT GIFs (all from GIPHY's stable CDN) -----
     const catGifs = [
         "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",   // cute kitty
         "https://media.giphy.com/media/3o6Zt6ML6Bklcaj9ja/giphy.gif", // grumpy cat
@@ -20,8 +20,7 @@
         "https://media.giphy.com/media/5i7W2I8PZ4I4Y/giphy.gif"     // confused cat
     ];
     
-    // Fallback GIF in case any URL fails to load
-    const FALLBACK_GIF = "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif";
+    const FALLBACK_GIF = catGifs[0]; // first GIF as fallback
     
     let gifIndex = 0;
 
@@ -95,7 +94,7 @@
         gifIndex = (gifIndex + 1) % catGifs.length;
         const newSrc = catGifs[gifIndex];
         
-        // Add error handler to fallback if image fails
+        // Error handler: if image fails, use fallback
         catGif.onerror = function() {
             this.src = FALLBACK_GIF;
             this.onerror = null; // prevent infinite loop
