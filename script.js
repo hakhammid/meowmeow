@@ -6,23 +6,15 @@
     const loveCard = document.getElementById('loveCard');
     const catGif = document.getElementById('catGif');
 
-    // ----- 100% WORKING CAT GIFs (all from GIPHY's stable CDN) -----
-    const catGifs = [
-        "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",   // cute kitty
-        "https://media.giphy.com/media/3o6Zt6ML6Bklcaj9ja/giphy.gif", // grumpy cat
-        "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif", // shy cat
-        "https://media.giphy.com/media/11s7Ke7jcNxCHS/giphy.gif",   // curious cat
-        "https://media.giphy.com/media/LR7G8lYbYzvJ2/giphy.gif",    // surprised cat
-        "https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif",    // pleading cat
-        "https://media.giphy.com/media/3o6gbbrvEOqxQdHQQM/giphy.gif", // excited cat
-        "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif", // dancing cat
-        "https://media.giphy.com/media/1s9pKcS0cNpQc/giphy.gif",    // happy cat
-        "https://media.giphy.com/media/5i7W2I8PZ4I4Y/giphy.gif"     // confused cat
-    ];
-    
-    const FALLBACK_GIF = catGifs[0]; // first GIF as fallback
-    
-    let gifIndex = 0;
+    // ----- SINGLE RELIABLE CAT GIF -----
+    const CAT_GIF_URL = "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"; // cute kitty
+
+    // Set the GIF once on page load
+    catGif.src = CAT_GIF_URL;
+    catGif.onerror = function() {
+        // Fallback in case the GIF fails (very unlikely)
+        this.src = "https://media.giphy.com/media/3o6Zt6ML6Bklcaj9ja/giphy.gif";
+    };
 
     // Prank core: YES button grows on each "No" click
     const BASE_FONT_SIZE = 18;
@@ -88,35 +80,13 @@
         noBtn.innerHTML = noMessages[noMsgIndex];
     }
     
-    // Change cat GIF to next in list with error fallback
-    function changeCatGif() {
-        if (isAccepted) return;
-        gifIndex = (gifIndex + 1) % catGifs.length;
-        const newSrc = catGifs[gifIndex];
-        
-        // Error handler: if image fails, use fallback
-        catGif.onerror = function() {
-            this.src = FALLBACK_GIF;
-            this.onerror = null; // prevent infinite loop
-        };
-        
-        catGif.src = newSrc;
-        
-        // Small bounce effect
-        catGif.style.transform = "scale(0.98)";
-        setTimeout(() => {
-            catGif.style.transform = "";
-        }, 150);
-    }
-    
-    // NO click handler
+    // NO click handler (no GIF change now)
     function onNoClick(e) {
         e.stopPropagation();
         if (isAccepted) return;
         
         enlargeYesButton();
         updateNoButtonText();
-        changeCatGif();
         
         loveCard.style.transform = "scale(1.01)";
         setTimeout(() => {
